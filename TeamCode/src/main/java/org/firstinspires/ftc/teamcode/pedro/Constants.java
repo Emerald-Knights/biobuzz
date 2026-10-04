@@ -23,20 +23,35 @@ public class Constants {
     });
 
     // Copied from test branch (Pedro 2.x ThreeWheelConstants)
+//    public static ThreeWheelConfig localizerConfig = new ThreeWheelConfig(c -> {
+//        c.leftEncoderName.set("rightFront");
+//        c.rightEncoderName.set("rightBack");
+//        c.strafeEncoderName.set("leftBack");
+//        c.leftPodY.set(6.13);
+//        c.rightPodY.set(-6.13);
+//        c.strafePodX.set(-4.86);
+//        c.forwardTicksToInches.set(0.001964593333);
+//        c.strafeTicksToInches.set(-0.001973913907);
+//        // 2.x called this turnTicksToInches. Re-run Three Wheel Tuner to confirm.
+//        c.turnTicksToRadians.set(0.001912528435);
+//        c.leftEncoderDirection.set(Encoder.REVERSE);
+//        c.rightEncoderDirection.set(Encoder.FORWARD);
+//        c.strafeEncoderDirection.set(Encoder.FORWARD);
+//    });
+
     public static ThreeWheelConfig localizerConfig = new ThreeWheelConfig(c -> {
         c.leftEncoderName.set("rightFront");
         c.rightEncoderName.set("rightBack");
         c.strafeEncoderName.set("leftBack");
-        c.leftPodY.set(6.13);
-        c.rightPodY.set(-6.13);
-        c.strafePodX.set(-4.86);
-        c.forwardTicksToInches.set(0.001964593333);
-        c.strafeTicksToInches.set(-0.001973913907);
-        // 2.x called this turnTicksToInches. Re-run Three Wheel Tuner to confirm.
-        c.turnTicksToRadians.set(0.001912528435);
+        c.leftPodY.set(6.279894018154288);
+        c.rightPodY.set(-6.583147204752397);
+        c.strafePodX.set(-4.732637236617522);
+        c.forwardTicksToInches.set(0.0019562586923902465);
+        c.strafeTicksToInches.set(0.001981178801386825);
+        c.turnTicksToRadians.set(0.001967449831237681);
         c.leftEncoderDirection.set(Encoder.FORWARD);
         c.rightEncoderDirection.set(Encoder.REVERSE);
-        c.strafeEncoderDirection.set(Encoder.FORWARD);
+        c.strafeEncoderDirection.set(Encoder.REVERSE);
     });
 
     // TODO: run Foresight Tuner, paste its foresightConfig here, then:

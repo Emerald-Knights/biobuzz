@@ -223,6 +223,7 @@ class ThreeWheelIMUResolution extends TuningOpMode<List<Double>> {
         waitForStart();
         while (!isStopRequested()) {
             localizer.update();
+            if (isStopRequested()) break; // reads after Stop can return 0
             position = localizer.pose();
             telemetry.addData(pod + " measured", pod.equals("Strafe") ? position.y() : position.x());
             telemetry.update();
@@ -276,6 +277,7 @@ class ThreeWheelIMUOffsets extends TuningOpMode<List<Double>> {
             waitForStart();
             while (!isStopRequested()) {
                 localizer.update();
+                if (isStopRequested()) break; // reads after Stop can return 0
                 position = localizer.pose();
             }
 
@@ -314,6 +316,7 @@ class ThreeWheelIMUTurn extends TuningOpMode<Double> {
             waitForStart();
             while (!isStopRequested()) {
                 localizer.update();
+                if (isStopRequested()) break; // reads after Stop can return 0
                 heading = localizer.getTotalHeading();
             }
 
