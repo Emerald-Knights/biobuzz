@@ -24,9 +24,9 @@ public class Constants {
 
     // Copied from test branch (Pedro 2.x ThreeWheelConstants)
     public static ThreeWheelConfig localizerConfig = new ThreeWheelConfig(c -> {
-        c.leftEncoderName.set("leftBack");
+        c.leftEncoderName.set("rightFront");
         c.rightEncoderName.set("rightBack");
-        c.strafeEncoderName.set("rightFront");
+        c.strafeEncoderName.set("leftBack");
         c.leftPodY.set(6.13);
         c.rightPodY.set(-6.13);
         c.strafePodX.set(-4.86);

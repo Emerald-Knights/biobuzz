@@ -17,9 +17,9 @@ import java.util.List;
 
 public class ThreeWheelTuner extends Procedure {
 
-    private static String leftEncoderName = "lf";
-    private static String rightEncoderName = "rr";
-    private static String strafeEncoderName = "lr";
+    private static String leftEncoderName = "rightFront";
+    private static String rightEncoderName = "rightBack";
+    private static String strafeEncoderName = "leftBack";
 
     public ThreeWheelTuner() {
         super("Three Wheel Tuner", "Tune three odometry pods");
@@ -29,9 +29,9 @@ public class ThreeWheelTuner extends Procedure {
     public void run() throws InterruptedException {
         Inputs setup = inputs("Encoder Setup",
                 "Set the motor ports that the three odometry encoders are plugged into.");
-        Inputs.Field<String> leftEncoder = setup.s("Left Encoder Motor Name").withDefault("lf");
-        Inputs.Field<String> rightEncoder = setup.s("Right Encoder Motor Name").withDefault("rr");
-        Inputs.Field<String> strafeEncoder = setup.s("Strafe Encoder Motor Name").withDefault("lr");
+        Inputs.Field<String> leftEncoder = setup.s("Left Encoder Motor Name").withDefault("rightFront");
+        Inputs.Field<String> rightEncoder = setup.s("Right Encoder Motor Name").withDefault("rightBack");
+        Inputs.Field<String> strafeEncoder = setup.s("Strafe Encoder Motor Name").withDefault("leftBack");
         awaitInputs(setup);
         leftEncoderName = leftEncoder.get();
         rightEncoderName = rightEncoder.get();
@@ -162,10 +162,10 @@ public class ThreeWheelTuner extends Procedure {
         for (LynxModule hub : map.getAll(LynxModule.class)) {
             hub.setBulkCachingMode(LynxModule.BulkCachingMode.AUTO);
         }
-        for (String name : new String[]{"lf", "lr", "rf", "rr"}) {
+        for (String name : new String[]{"leftFront", "leftBack", "rightFront", "rightBack"}) {
             DcMotorEx motor = map.get(DcMotorEx.class, name);
             motor.setPower(0);
-            motor.setDirection(name.equals("lf") || name.equals("lr")
+            motor.setDirection(name.equals("leftFront") || name.equals("leftBack")
                     ? DcMotorSimple.Direction.REVERSE : DcMotorSimple.Direction.FORWARD);
             motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         }
@@ -198,6 +198,8 @@ class ThreeWheelResolution extends TuningOpMode<List<Double>> {
         while (!isStopRequested()) {
             localizer.update();
             position = localizer.pose();
+            telemetry.addData(pod + " measured", pod.equals("Strafe") ? position.y() : position.x());
+            telemetry.update();
         }
 
         if (position == null) {

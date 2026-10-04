@@ -19,9 +19,9 @@ import java.util.List;
 
 public class ThreeWheelIMUTuner extends Procedure {
 
-    private static String leftEncoderName = "lf";
-    private static String rightEncoderName = "rr";
-    private static String strafeEncoderName = "lr";
+    private static String leftEncoderName = "leftBack";
+    private static String rightEncoderName = "rightBack";
+    private static String strafeEncoderName = "rightFront";
     private static String imuName = "imu";
     private static RevHubOrientationOnRobot.LogoFacingDirection logoDirection =
             RevHubOrientationOnRobot.LogoFacingDirection.UP;
@@ -36,9 +36,9 @@ public class ThreeWheelIMUTuner extends Procedure {
     public void run() throws InterruptedException {
         Inputs setup = inputs("Encoder + IMU Setup",
                 "Set encoder motor ports, IMU HardwareMap name, and Control Hub orientation.");
-        Inputs.Field<String> leftEncoder = setup.s("Left Encoder Motor Name").withDefault("lf");
-        Inputs.Field<String> rightEncoder = setup.s("Right Encoder Motor Name").withDefault("rr");
-        Inputs.Field<String> strafeEncoder = setup.s("Strafe Encoder Motor Name").withDefault("lr");
+        Inputs.Field<String> leftEncoder = setup.s("Left Encoder Motor Name").withDefault("leftBack");
+        Inputs.Field<String> rightEncoder = setup.s("Right Encoder Motor Name").withDefault("rightBack");
+        Inputs.Field<String> strafeEncoder = setup.s("Strafe Encoder Motor Name").withDefault("rightFront");
         Inputs.Field<String> imu = setup.s("IMU HardwareMap Name").withDefault("imu");
         Inputs.Field<RevHubOrientationOnRobot.LogoFacingDirection> logo =
                 setup.e("Logo Facing Direction", RevHubOrientationOnRobot.LogoFacingDirection.class)
@@ -188,10 +188,10 @@ public class ThreeWheelIMUTuner extends Procedure {
         for (LynxModule hub : map.getAll(LynxModule.class)) {
             hub.setBulkCachingMode(LynxModule.BulkCachingMode.AUTO);
         }
-        for (String name : new String[]{"lf", "lr", "rf", "rr"}) {
+        for (String name : new String[]{"leftFront", "leftBack", "rightFront", "rightBack"}) {
             DcMotorEx motor = map.get(DcMotorEx.class, name);
             motor.setPower(0);
-            motor.setDirection(name.equals("lf") || name.equals("lr")
+            motor.setDirection(name.equals("leftFront") || name.equals("leftBack")
                     ? DcMotorSimple.Direction.REVERSE : DcMotorSimple.Direction.FORWARD);
             motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         }
@@ -224,6 +224,8 @@ class ThreeWheelIMUResolution extends TuningOpMode<List<Double>> {
         while (!isStopRequested()) {
             localizer.update();
             position = localizer.pose();
+            telemetry.addData(pod + " measured", pod.equals("Strafe") ? position.y() : position.x());
+            telemetry.update();
         }
 
         if (position == null) {
