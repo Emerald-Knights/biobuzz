@@ -38,6 +38,8 @@ public class Drive extends EKLinear {
             robot.intake.reverseIntake= driverStation.gamepad2.y;
             robot.launch.activeLaunch = driverStation.gamepad2.b;
 
+            robot.flowerIntake.activeFlower = driverStation.gamepad2.x;
+
 
 
             telemetry.addData("Reset: ", driverStation.getReset());

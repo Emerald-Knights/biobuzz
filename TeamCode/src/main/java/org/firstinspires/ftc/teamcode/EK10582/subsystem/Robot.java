@@ -29,7 +29,7 @@ public class Robot {
 
     public DcMotorEx leftFront, leftBack, rightFront, rightBack, intakeMotor, launchMotor;
 
-//    public Servo;
+    public Servo flowerServo;
 //
 //    public CRServo;
 
@@ -44,11 +44,13 @@ public class Robot {
     public MecanumDrive mecanumDrive = new MecanumDrive();
     public Intake intake = new Intake();
 
+    public FlowerIntake flowerIntake = new FlowerIntake();
+
     public Launch launch = new Launch();
 
     //Lists of active subsystems and telemetry
-    public List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, launch);
-    public List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake, launch);
+    public List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, launch, flowerIntake);
+    public List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake, launch, flowerIntake);
 
 
     //Creates an arraylist called actions that stores all the actions that are currently being done
@@ -78,6 +80,8 @@ public class Robot {
 
 
         //servo hardwareMapping
+        flowerServo = hardwareMap.get(Servo.class, "intakeMotor");
+
 //
 
 
