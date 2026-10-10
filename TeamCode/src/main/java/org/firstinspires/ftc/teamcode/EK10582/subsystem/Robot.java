@@ -49,9 +49,10 @@ public class Robot {
     public Launch launch = new Launch();
 
     //Lists of active subsystems and telemetry
-    public List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, launch, flowerIntake);
-    public List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake, launch, flowerIntake);
-
+    public List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, launch);
+    // removed flowerIntake
+    public List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake, launch);
+// removed flowerIntake
 
     //Creates an arraylist called actions that stores all the actions that are currently being done
     private ArrayList<Action> actions = new ArrayList<Action>();
@@ -80,7 +81,7 @@ public class Robot {
 
 
         //servo hardwareMapping
-        flowerServo = hardwareMap.get(Servo.class, "intakeMotor");
+        //flowerServo = hardwareMap.get(Servo.class, "intakeMotor");
 
 //
 

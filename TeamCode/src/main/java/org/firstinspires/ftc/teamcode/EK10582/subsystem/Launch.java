@@ -11,6 +11,8 @@ public class Launch extends Subsystem{
 
     }
     public void update(boolean isAuton) {
+        if (isAuton) return;
+
         if (activeLaunch) {
             Robot.getInstance().launchMotor.setPower(0.8);
         } else {
