@@ -55,7 +55,7 @@ public class AutonShoot extends Action {
             case SPIN:
                 //Robot.getInstance().launch.activeLaunch = true;
                 Robot.getInstance().launchMotor.setPower(0.8);
-                if (stateTimer.milliseconds() >= 500) {
+                if (stateTimer.milliseconds() >= 350) {
                     shootCounter++;
                     setInternalState(shootCounter >= MAX_SHOOTS ? State.FINISHED : State.WAIT);
                 }
@@ -95,7 +95,7 @@ public class AutonShoot extends Action {
                 // and the previous shot's RPM drop.
                 //Robot.getInstance().launch.activeLaunch = false;
                 Robot.getInstance().launchMotor.setPower(0.0);
-                if (stateTimer.milliseconds() >= 400) {
+                if (stateTimer.milliseconds() >= 800) {
                     setInternalState(State.SPIN);
                 }
                 break;

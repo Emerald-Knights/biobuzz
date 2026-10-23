@@ -2,7 +2,10 @@ package org.firstinspires.ftc.teamcode.pedro;
 
 import com.pedropathing.algorithm.Foresight;
 import com.pedropathing.algorithm.ForesightConfig;
+import com.pedropathing.controllers.Controller;
 import com.pedropathing.follower.Follower;
+import com.pedropathing.math.Matrix;
+import com.pedropathing.math.Vector2D;
 import com.pedropathing.revhub.drivetrains.Mecanum;
 import com.pedropathing.revhub.drivetrains.MecanumConfig;
 import com.pedropathing.revhub.localizers.Encoder;
@@ -57,29 +60,30 @@ public class Constants {
         c.strafeEncoderDirection.set(Encoder.REVERSE);
     });
 
-    public static ForesightConfig foresightConfig = new ForesightConfig(
-            c -> {
-//                Controller primaryTranslationalForward = Controller.proportional(0.3);
-//                Controller secondaryTranslationalForward = Controller.proportional(0.1);
-//                Controller primaryTranslationalLateral = Controller.proportional(0.3);
-//                Controller secondaryTranslationalLateral = Controller.proportional(0.1);
-//                c.forwardTranslational.set(Controller.piecewise(secondaryTranslationalForward).put(2.5, primaryTranslationalForward));
-//                c.strafeTranslational.set(Controller.piecewise(secondaryTranslationalLateral).put(2.5, primaryTranslationalLateral));
-//                c.coast.set(Controller.proportionalFeedforward(0.010978350889324107));
-//                c.brake.set(Controller.proportionalFeedforward(0.008731598255925491));
-//                c.headingFeedback.set(Controller.proportional(5.258721785960744));
-//                c.headingBrakeCoefficients.set(Vector2D.cartesian(0.05642143125655298, 0.0063829525363003695));
-//                c.linearBrakeCoefficients.set(Matrix.diag(0.10605894992901523, 0.08719146175596092));
-//                c.quadraticBrakeCoefficients.set(Matrix.diag(0.0014663966976606565, 0.0013837064502458813));
-//                c.maxAchievableForwardVelocity.set(72.72923108818539);
-//                c.maxAchievableStrafeVelocity.set(52.34323936525474);
-//                c.naturalForwardDeceleration.set(85.01144677379789);
-//                c.naturalStrafeDeceleration.set(104.49787535782846);
-            }
-    );
+    public static ForesightConfig foresightConfig = new ForesightConfig(c -> {
+        Controller primaryTranslationalForward = Controller.proportional(0.26620192904657325);
+        Controller secondaryTranslationalForward = Controller.proportional(0.09835449973616185);
+        Controller primaryTranslationalLateral = Controller.proportional(1.6332122685531236);
+        Controller secondaryTranslationalLateral = Controller.proportional(0.6034282929948298);
 
-    // TODO: run Foresight Tuner, paste its foresightConfig here, then:
-    // return new Follower(new ThreeWheelLocalizer(h, localizerConfig), new Mecanum(h, drivetrainConfig), <Foresight algorithm>);
+        c.forwardTranslational.set(Controller.piecewise(secondaryTranslationalForward).put(2.5, primaryTranslationalForward));
+        c.strafeTranslational.set(Controller.piecewise(secondaryTranslationalLateral).put(2.5, primaryTranslationalLateral));
+
+        c.coast.set(Controller.proportionalFeedforward(0.011910655987020615));
+        c.brake.set(Controller.proportionalFeedforward(0.010124057588967523));
+
+        c.headingFeedback.set(Controller.proportional(4.5904054664613));
+        c.headingBrakeCoefficients.set(Vector2D.cartesian(0.053311299058647885, 0.004796251121740766));
+
+        c.linearBrakeCoefficients.set(Matrix.diag(0.08614448715646172, 0.04146296617072096));
+        c.quadraticBrakeCoefficients.set(Matrix.diag(0.0011866365297115546, 0.0019589033208753217));
+
+        c.maxAchievableForwardVelocity.set(82.12442215002167);
+        c.maxAchievableStrafeVelocity.set(64.48169912997005);
+        c.naturalForwardDeceleration.set(41.94696995605275);
+        c.naturalStrafeDeceleration.set(146.0507147606874);
+    });
+
     public static Follower create(HardwareMap h) {
         return new Follower(
                 new ThreeWheelLocalizer(h, localizerConfig),
