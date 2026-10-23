@@ -33,9 +33,9 @@ public class Drive extends EKLinear {
             //driver 2 controls
 
 
-            robot.intake.activeIntake= driverStation.gamepad2.a;
+            robot.intake.activeIntake= driverStation.gamepad1.right_bumper;
 
-            robot.intake.reverseIntake= driverStation.gamepad2.y;
+            robot.intake.reverseIntake= driverStation.gamepad1.left_bumper;
             robot.launch.activeLaunch = driverStation.gamepad2.b;
 
             robot.flowerIntake.activeFlower = driverStation.gamepad2.x;
