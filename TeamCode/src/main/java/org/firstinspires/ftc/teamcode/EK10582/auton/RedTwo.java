@@ -1,0 +1,64 @@
+package org.firstinspires.ftc.teamcode.EK10582.auton;
+
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+
+import com.pedropathing.api.PoseFactory;
+import com.pedropathing.math.Pose;
+import org.firstinspires.ftc.teamcode.EK10582.auton.action.AutonShoot;
+
+import static com.pedropathing.api.Paths.*;
+
+import com.pedropathing.paths.Path;
+
+import static com.pedropathing.ivy.pedro.PedroCommands.follow;
+import static com.pedropathing.ivy.groups.Groups.sequential;
+
+@Autonomous
+public class RedTwo extends AutonBase {
+
+    protected PoseFactory poseFactory() {
+        return PoseFactory.degrees();
+    }
+
+    private final PoseFactory redTwo = poseFactory();
+    // our poses
+    private final Pose startPose = redTwo.of(62, 132, 270);
+
+    private final Pose shoot = redTwo.of(62, 115, 270);
+    private final Pose park = redTwo.of(11, 115, 270);
+
+
+    //poses from before
+
+    private Path shoot() {
+        return line(startPose, shoot).linear(startPose, shoot);
+    }
+    private Path park() {
+        return line(shoot, park).linear(shoot, park);
+
+    }
+
+    @Override
+    protected Pose startPose() {
+        return startPose;
+    }
+
+    @Override
+    protected void autonTelemetry() {
+        allTelemetry.addData("X", follower.pose().x());
+        allTelemetry.addData("Y", follower.pose().y());
+        allTelemetry.addData("Heading", Math.toDegrees(follower.pose().heading()));
+        allTelemetry.addData("Follower Mode", follower.mode());
+    }
+
+    @Override
+    public void runOpMode() {
+        waitForStart(); // creates the follower at startPose()
+        run(sequential(
+
+                follow(follower, shoot()),
+                action(new AutonShoot()),
+                follow(follower, park())
+        ));
+    }
+}
