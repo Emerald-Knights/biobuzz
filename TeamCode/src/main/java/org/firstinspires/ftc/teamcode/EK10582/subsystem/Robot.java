@@ -81,7 +81,7 @@ public class Robot {
 
 
         //servo hardwareMapping
-        //flowerServo = hardwareMap.get(Servo.class, "intakeMotor");
+        flowerServo = hardwareMap.get(Servo.class, "flowerServo");
 
 //
 
