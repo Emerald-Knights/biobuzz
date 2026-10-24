@@ -9,9 +9,11 @@ import org.firstinspires.ftc.teamcode.EK10582.auton.action.AutonShoot;
 import static com.pedropathing.api.Paths.*;
 
 import com.pedropathing.paths.Path;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 import static com.pedropathing.ivy.groups.Groups.sequential;
+import static com.pedropathing.ivy.commands.Commands.waitMs;
 
 @Autonomous
 public class RedTwo extends AutonBase {
@@ -37,7 +39,6 @@ public class RedTwo extends AutonBase {
         return line(shoot, park).linear(shoot, park);
 
     }
-
     @Override
     protected Pose startPose() {
         return startPose;
@@ -55,7 +56,7 @@ public class RedTwo extends AutonBase {
     public void runOpMode() {
         waitForStart(); // creates the follower at startPose()
         run(sequential(
-
+                waitMs(15000), // wait 15 seconds before driving
                 follow(follower, shoot()),
                 action(new AutonShoot()),
                 follow(follower, park())

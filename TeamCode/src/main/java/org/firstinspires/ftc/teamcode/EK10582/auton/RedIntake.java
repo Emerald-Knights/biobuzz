@@ -4,6 +4,10 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import com.pedropathing.api.PoseFactory;
 import com.pedropathing.math.Pose;
+
+import org.firstinspires.ftc.teamcode.EK10582.auton.action.AutonFlowerDown;
+import org.firstinspires.ftc.teamcode.EK10582.auton.action.AutonFlowerUp;
+import org.firstinspires.ftc.teamcode.EK10582.auton.action.AutonIntake;
 import org.firstinspires.ftc.teamcode.EK10582.auton.action.AutonShoot;
 
 import static com.pedropathing.api.Paths.*;
@@ -67,8 +71,14 @@ public class RedIntake extends AutonBase {
         run(sequential(
                 follow(follower, shoot()),
                 action(new AutonShoot()),
+                follow(follower, intakeReady()),
+                action(new AutonFlowerDown()),
+                follow(follower,intake()),
+                action(new AutonIntake()),
+                follow(follower, intakeBack()),
+                action(new AutonFlowerUp()),
                 follow(follower, park())
-                //remember to add a intake action
+
         ));
     }
 }

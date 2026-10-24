@@ -4,12 +4,10 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.Robot;
 import org.firstinspires.ftc.teamcode.EK10582.subsystem.SubsystemConstants;
 
-public class Flower extends Action {
+public class AutonFlowerDown extends Action {
 
     private enum State {
         DOWN,      // Flower down
-        INTAKE,    // Run the AutonIntake cycle
-        UP,        // Flower back up
         FINISHED
     }
 
@@ -17,7 +15,6 @@ public class Flower extends Action {
     private final ElapsedTime stateTimer = new ElapsedTime();
 
     // the intake cycle runs inside this action, so it is NOT added with Robot.addAction()
-    private final AutonIntake intake = new AutonIntake();
 
     @Override
     public void start() {
@@ -31,22 +28,6 @@ public class Flower extends Action {
         switch (currentState) {
             case DOWN:
                 Robot.getInstance().flowerServo.setPosition(SubsystemConstants.FLOWER_POSITION);
-                if (stateTimer.milliseconds() >= 400) {
-                    setInternalState(State.INTAKE);
-                    intake.start();
-                }
-                break;
-
-            case INTAKE:
-                intake.update();
-                if (intake.isComplete) {
-                    intake.end();
-                    setInternalState(State.UP);
-                }
-                break;
-
-            case UP:
-                Robot.getInstance().flowerServo.setPosition(SubsystemConstants.FLOWER_REST);
                 if (stateTimer.milliseconds() >= 400) {
                     setInternalState(State.FINISHED);
                 }
@@ -67,6 +48,6 @@ public class Flower extends Action {
 
     @Override
     public void end() {
-        intake.end();
+
     }
 }
