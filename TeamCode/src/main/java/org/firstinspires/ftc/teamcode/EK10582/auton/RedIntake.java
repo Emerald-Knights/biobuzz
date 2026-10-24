@@ -26,8 +26,8 @@ public class RedIntake extends AutonBase {
 
     private final PoseFactory redIntake = poseFactory();
     // our poses
-    private final Pose startPose = redIntake.of(56, 8, 90);
-    private final Pose shoot = redIntake.of(56, 18, 90);
+    private final Pose startPose = redIntake.of(56, 8, 270);
+    private final Pose shoot = redIntake.of(56, 18, 270);
     private final Pose flowerBack = redIntake.of(26, 47, 180);
     private final Pose flowerForward = redIntake.of(13, 47, 180);
     private final Pose park = redIntake.of(12, 102, 90);

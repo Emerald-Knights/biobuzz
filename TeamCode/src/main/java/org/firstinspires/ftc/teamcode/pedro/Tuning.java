@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.pedro;
 
+import com.pedropathing.algorithm.Foresight;
 import com.pedropathing.revhub.drivetrains.Mecanum;
 import com.pedropathing.revhub.localizers.ThreeWheelLocalizer;
 import com.pedropathing.tuning.autotune.Procedure;
@@ -33,6 +34,6 @@ public class Tuning {
         return new Tests(
                 h -> new Mecanum(h, Constants.drivetrainConfig),
                 h -> new ThreeWheelLocalizer(h, Constants.localizerConfig),
-                null); // add Foresight algorithm after tuning
-    }
+                () -> new Foresight(Constants.foresightConfig));
+                    }
 }

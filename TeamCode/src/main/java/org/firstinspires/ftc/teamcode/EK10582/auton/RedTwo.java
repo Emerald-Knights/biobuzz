@@ -24,10 +24,10 @@ public class RedTwo extends AutonBase {
 
     private final PoseFactory redTwo = poseFactory();
     // our poses
-    private final Pose startPose = redTwo.of(62, 132, 270);
+    private final Pose startPose = redTwo.of(62, 132, 90);
 
-    private final Pose shoot = redTwo.of(62, 115, 270);
-    private final Pose park = redTwo.of(11, 115, 270);
+    private final Pose shoot = redTwo.of(62, 115, 90);
+    private final Pose park = redTwo.of(11, 115, 90);
 
 
     //poses from before

@@ -22,10 +22,10 @@ public class RedFirst extends AutonBase {
 
     private final PoseFactory redFirst = poseFactory();
     // our poses
-    private final Pose startPose = redFirst.of(56, 8, 90);
+    private final Pose startPose = redFirst.of(56, 8, 270);
 
-    private final Pose middle = redFirst.of(56, 18, 90);
-    private final Pose park = redFirst.of(11, 99, 90);
+    private final Pose middle = redFirst.of(56, 18, 270);
+    private final Pose park = redFirst.of(11, 92, 270);
 
 
     // other poses...
