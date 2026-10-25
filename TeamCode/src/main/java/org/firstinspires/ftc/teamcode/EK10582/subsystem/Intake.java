@@ -13,6 +13,7 @@ public class Intake extends Subsystem{
 
     }
     public void update(boolean isAuton) {
+        if (isAuton) return;
         if (activeIntake) {
             Robot.getInstance().intakeMotor.setPower(0.8);
         } else if(reverseIntake) {

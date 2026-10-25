@@ -57,11 +57,11 @@ public class DriverStation {
 
 
 
-    boolean lateRB1 = false;
-    public boolean getRB1(){
+    boolean lateLB1 = false;
+    public boolean getLB1(){
         boolean out;
-        out = gamepad1.right_bumper && !lateRB1;
-        lateRB1 = gamepad1.right_bumper;
+        out = gamepad1.left_bumper && !lateLB1;
+        lateLB1 = gamepad1.right_bumper;
         return out;
     }
 

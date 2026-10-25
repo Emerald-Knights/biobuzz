@@ -27,7 +27,7 @@ public class AutonFlowerUp extends Action {
         switch (currentState) {
 
             case UP:
-                Robot.getInstance().flowerServo.setPosition(SubsystemConstants.FLOWER_REST);
+                Robot.getInstance().flowerServo.setPosition(SubsystemConstants.FLOWER_UP);
                 if (stateTimer.milliseconds() >= 400) {
                     setInternalState(State.FINISHED);
                 }

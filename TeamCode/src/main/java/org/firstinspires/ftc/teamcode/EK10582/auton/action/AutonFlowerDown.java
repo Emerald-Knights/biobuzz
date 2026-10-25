@@ -27,7 +27,7 @@ public class AutonFlowerDown extends Action {
     public void update() {
         switch (currentState) {
             case DOWN:
-                Robot.getInstance().flowerServo.setPosition(SubsystemConstants.FLOWER_POSITION);
+                Robot.getInstance().flowerServo.setPosition(SubsystemConstants.FLOWER_DOWN);
                 if (stateTimer.milliseconds() >= 400) {
                     setInternalState(State.FINISHED);
                 }

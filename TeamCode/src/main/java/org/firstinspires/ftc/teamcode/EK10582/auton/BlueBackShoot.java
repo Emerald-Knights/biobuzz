@@ -4,9 +4,10 @@ import com.pedropathing.api.PoseFactory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 @Autonomous
-public class BlueFirst extends RedFirst {
+public class BlueBackShoot extends RedBackShoot {
     @Override
+
     protected PoseFactory poseFactory() {
-        return PoseFactory.degrees().mirrorX(70.75);
+        return PoseFactory.degrees().mirrorX(70.75).mirrorY(70.75);
     }
 }

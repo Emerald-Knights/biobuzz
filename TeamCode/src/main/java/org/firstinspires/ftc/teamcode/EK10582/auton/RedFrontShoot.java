@@ -9,36 +9,39 @@ import org.firstinspires.ftc.teamcode.EK10582.auton.action.AutonShoot;
 import static com.pedropathing.api.Paths.*;
 
 import com.pedropathing.paths.Path;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
+import static com.pedropathing.ivy.commands.Commands.waitMs;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 import static com.pedropathing.ivy.groups.Groups.sequential;
-import static com.pedropathing.ivy.commands.Commands.waitMs;
 
 @Autonomous
-public class RedTwo extends AutonBase {
+public class RedFrontShoot extends AutonBase {
 
     protected PoseFactory poseFactory() {
         return PoseFactory.degrees();
     }
 
-    private final PoseFactory redTwo = poseFactory();
+    private final PoseFactory redFrontShoot = poseFactory();
     // our poses
-    private final Pose startPose = redTwo.of(62, 132, 90);
+    private final Pose startPose = redFrontShoot.of(56, 8, 270);
 
-    private final Pose shoot = redTwo.of(62, 115, 90);
-    private final Pose park = redTwo.of(11, 115, 90);
+    private final Pose middle = redFrontShoot.of(56, 18, 270);
+    private final Pose park = redFrontShoot.of(8, 96, 270);
 
+
+    // other poses...
+    private final Pose controlPose1 = redFrontShoot.of(22, 27, 0);
 
     //poses from before
 
-    private Path shoot() {
-        return line(startPose, shoot).linear(startPose, shoot);
+    private Path middle() {
+        return line(startPose, middle).linear(startPose, middle);
     }
     private Path park() {
-        return line(shoot, park).linear(shoot, park);
+        return curve(middle, controlPose1, park).linear(middle, park);
 
     }
+
     @Override
     protected Pose startPose() {
         return startPose;
@@ -56,10 +59,10 @@ public class RedTwo extends AutonBase {
     public void runOpMode() {
         waitForStart(); // creates the follower at startPose()
         run(sequential(
-                waitMs(15000), // wait 15 seconds before driving
-                follow(follower, shoot()),
+                follow(follower, middle()),
                 action(new AutonShoot()),
-                follow(follower, park())
+                follow(follower, park()),
+                waitMs(2000)
         ));
     }
 }

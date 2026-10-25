@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.teamcode.EK10582.EKLinear;
 
 @TeleOp(name="Servo Tester")
-public class ServoTester extends EKLinear {
+public class ServoTester extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {

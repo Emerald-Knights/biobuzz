@@ -14,31 +14,38 @@ import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 import static com.pedropathing.ivy.groups.Groups.sequential;
 
 @Autonomous
-public class RedFirst extends AutonBase {
+public class RedBackIntake extends AutonBase {
 
     protected PoseFactory poseFactory() {
         return PoseFactory.degrees();
     }
 
-    private final PoseFactory redFirst = poseFactory();
+    private final PoseFactory redTwoIntake = poseFactory();
     // our poses
-    private final Pose startPose = redFirst.of(56, 8, 270);
+    private final Pose startPose = redTwoIntake.of(62, 132, 270);
+    private final Pose shoot = redTwoIntake.of(62, 115, 270);
+    private final Pose flowerBack = redTwoIntake.of(47, 115, 90);
+    private final Pose flowerForward = redTwoIntake.of(47, 128, 90);
+    private final Pose park = redTwoIntake.of(15, 115, 180);
 
-    private final Pose middle = redFirst.of(56, 18, 270);
-    private final Pose park = redFirst.of(11, 92, 270);
-
-
-    // other poses...
-    private final Pose controlPose1 = redFirst.of(22, 27, 0);
 
     //poses from before
+    private final Pose controlPose1 = redTwoIntake.of(52, 90, 0);
 
-    private Path middle() {
-        return line(startPose, middle).linear(startPose, middle);
+    private Path shoot() {
+        return line(startPose, shoot).linear(startPose, shoot);
+    }
+    private Path intakeReady() {
+        return curve(shoot, controlPose1, flowerBack).linear(shoot, flowerBack);
+    }
+    private Path intake() {
+        return line(flowerBack, flowerForward).linear(flowerBack, flowerForward);
+    }
+    private Path intakeBack() {
+        return line(flowerForward, flowerBack).linear(flowerForward, flowerBack);
     }
     private Path park() {
-        return curve(middle, controlPose1, park).linear(middle, park);
-
+        return line(flowerBack, park).linear(flowerBack, park);
     }
 
     @Override
@@ -58,9 +65,11 @@ public class RedFirst extends AutonBase {
     public void runOpMode() {
         waitForStart(); // creates the follower at startPose()
         run(sequential(
-                follow(follower, middle()),
+                follow(follower, shoot()),
                 action(new AutonShoot()),
                 follow(follower, park())
+                //remember to add a intake action
         ));
     }
 }
+
