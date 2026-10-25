@@ -1,52 +1,42 @@
 package org.firstinspires.ftc.teamcode.EK10582.auton;
 
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-
 
 import com.pedropathing.api.PoseFactory;
 import com.pedropathing.math.Pose;
 
-
 import org.firstinspires.ftc.teamcode.EK10582.auton.action.AutonIntake;
 import org.firstinspires.ftc.teamcode.EK10582.auton.action.AutonShoot;
 
-
 import static com.pedropathing.api.Paths.*;
-
 
 import com.pedropathing.paths.Path;
 
+import org.firstinspires.ftc.teamcode.pedro.Constants;
 
 import static com.pedropathing.ivy.commands.Commands.waitMs;
 import static com.pedropathing.ivy.groups.Groups.parallel;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 import static com.pedropathing.ivy.groups.Groups.sequential;
 
-
 @Autonomous
 public class RedIntake extends AutonBase {
-
 
     protected PoseFactory poseFactory() {
         return PoseFactory.degrees();
     }
 
-
     private final PoseFactory redIntake = poseFactory();
     // our poses
-    private final Pose startPose = redIntake.of(56, 8, 90);
-    private final Pose shoot = redIntake.of(56, 18, 90);
-    private final Pose ballBack = redIntake.of(30, 8, 180);
-    private final Pose ballposition = redIntake.of(12, 8, 180);
-    private final Pose park = redIntake.of(8, 96, 90);
-
-
+    private final Pose startPose = redIntake.of(56, 8, 270);
+    private final Pose shoot = redIntake.of(56, 18, 270);
+    private final Pose ballBack = redIntake.of(30, 10, 180);
+    private final Pose ballposition = redIntake.of(5, 10, 180);
+    private final Pose park = redIntake.of(8, 96, 270);
 
 
     //poses from before
     private final Pose controlPose1 = redIntake.of(38, 60, 0);
-
 
     private Path shoot() {
         return line(startPose, shoot).linear(startPose, shoot);
@@ -55,21 +45,21 @@ public class RedIntake extends AutonBase {
         return line(shoot, ballBack).linear(shoot, ballBack);
     }
     private Path intake() {
-        return line(ballBack, ballposition).linear(ballBack, ballposition);
+        //caps speed at 20 in/s for just this path so the intake has time to grab the balls
+        return line(ballBack, ballposition).linear(ballBack, ballposition)
+                .with(Constants.foresightConfig.maxVelocityConstraint.at(23.0));
     }
     private Path intakeBack() {
         return line(ballposition, ballBack).linear(ballposition, ballBack);
     }
     private Path park() {
-        return curve(ballposition,controlPose1, park).linear(ballposition, park);
+        return curve(ballBack,controlPose1, park).linear(ballBack, park);
     }
-
 
     @Override
     protected Pose startPose() {
         return startPose;
     }
-
 
     @Override
     protected void autonTelemetry() {
@@ -78,7 +68,6 @@ public class RedIntake extends AutonBase {
         allTelemetry.addData("Heading", Math.toDegrees(follower.pose().heading()));
         allTelemetry.addData("Follower Mode", follower.mode());
     }
-
 
     @Override
     public void runOpMode() {
@@ -89,15 +78,14 @@ public class RedIntake extends AutonBase {
                 follow(follower, intakeReady()),
                 parallel(
                         follow(follower, intake()),
-                        action(new AutonIntake())
+                        action(new AutonIntake(3000))
                 ),
-                waitMs(1000),
+                waitMs(500),
                 parallel(
                         follow(follower, intakeBack()),
-                        action(new AutonIntake())
+                        action(new AutonIntake(3000))
                 ),
                 follow(follower, park())
-
 
         ));
     }

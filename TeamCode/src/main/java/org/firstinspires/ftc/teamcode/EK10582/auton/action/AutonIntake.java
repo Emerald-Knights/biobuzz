@@ -16,6 +16,15 @@ public class AutonIntake extends Action {
     private State currentState = State.SPIN;
     private final ElapsedTime stateTimer = new ElapsedTime();
     private final ElapsedTime totalTimer = new ElapsedTime();
+    private final double durationMs;
+
+    public AutonIntake() {
+        this(1200);
+    }
+
+    public AutonIntake(double durationMs) {
+        this.durationMs = durationMs;
+    }
 
 
     @Override
@@ -39,7 +48,7 @@ public class AutonIntake extends Action {
         switch (currentState) {
             case SPIN:
                 Robot.getInstance().intakeMotor.setPower(0.8);
-                if (stateTimer.milliseconds() >= 1200) {
+                if (stateTimer.milliseconds() >= durationMs) {
                     setInternalState(State.FINISHED);
                 }
                 break;
