@@ -12,32 +12,42 @@ import com.pedropathing.paths.Path;
 
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 import static com.pedropathing.ivy.groups.Groups.sequential;
-import static com.pedropathing.ivy.commands.Commands.waitMs;
 
 @Autonomous
-public class RedBackPark extends AutonBase {
+public class BackFlower extends AutonBase {
 
     protected PoseFactory poseFactory() {
         return PoseFactory.degrees();
     }
 
-    private final PoseFactory redBackPark = poseFactory();
+    private final PoseFactory backFlower = poseFactory();
     // our poses
-    private final Pose startPose = redBackPark.of(62, 132, 90);
-
-    private final Pose shoot = redBackPark.of(62, 115, 90);
-    private final Pose park = redBackPark.of(12, 115, 90);
+    private final Pose startPose = backFlower.of(62, 132, 270);
+    private final Pose shoot = backFlower.of(62, 115, 270);
+    private final Pose flowerBack = backFlower.of(47, 115, 90);
+    private final Pose flowerForward = backFlower.of(47, 128, 90);
+    private final Pose park = backFlower.of(12, 115, 180);
 
 
     //poses from before
+    private final Pose controlPose1 = backFlower.of(52, 90, 0);
 
     private Path shoot() {
         return line(startPose, shoot).linear(startPose, shoot);
     }
-    private Path park() {
-        return line(shoot, park).linear(shoot, park);
-
+    private Path intakeReady() {
+        return curve(shoot, controlPose1, flowerBack).linear(shoot, flowerBack);
     }
+    private Path intake() {
+        return line(flowerBack, flowerForward).linear(flowerBack, flowerForward);
+    }
+    private Path intakeBack() {
+        return line(flowerForward, flowerBack).linear(flowerForward, flowerBack);
+    }
+    private Path park() {
+        return line(flowerBack, park).linear(flowerBack, park);
+    }
+
     @Override
     protected Pose startPose() {
         return startPose;
@@ -55,9 +65,11 @@ public class RedBackPark extends AutonBase {
     public void runOpMode() {
         waitForStart(); // creates the follower at startPose()
         run(sequential(
-                waitMs(15000), // wait 15 seconds before driving
                 follow(follower, shoot()),
+                action(new AutonShoot()),
                 follow(follower, park())
+                //remember to add a intake action
         ));
     }
 }
+

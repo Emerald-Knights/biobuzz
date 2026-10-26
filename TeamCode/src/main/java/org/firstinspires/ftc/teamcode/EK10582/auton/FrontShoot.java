@@ -15,22 +15,22 @@ import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 import static com.pedropathing.ivy.groups.Groups.sequential;
 
 @Autonomous
-public class RedFrontShoot extends AutonBase {
+public class FrontShoot extends AutonBase {
 
     protected PoseFactory poseFactory() {
         return PoseFactory.degrees();
     }
 
-    private final PoseFactory redFrontShoot = poseFactory();
+    private final PoseFactory frontShoot = poseFactory();
     // our poses
-    private final Pose startPose = redFrontShoot.of(56, 8, 270);
+    private final Pose startPose = frontShoot.of(56, 8, 270);
 
-    private final Pose middle = redFrontShoot.of(56, 18, 270);
-    private final Pose park = redFrontShoot.of(8, 96, 270);
+    private final Pose middle = frontShoot.of(56, 18, 270);
+    private final Pose park = frontShoot.of(8, 96, 270);
 
 
-    // other poses...
-    private final Pose controlPose1 = redFrontShoot.of(22, 27, 0);
+    // control points
+    private final Pose controlPose1 = frontShoot.of(22, 27, 0);
 
     //poses from before
 

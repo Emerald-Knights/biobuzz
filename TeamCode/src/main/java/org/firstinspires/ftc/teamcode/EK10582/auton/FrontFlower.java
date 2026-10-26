@@ -4,33 +4,38 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import com.pedropathing.api.PoseFactory;
 import com.pedropathing.math.Pose;
+
+import org.firstinspires.ftc.teamcode.EK10582.auton.action.AutonFlowerDown;
+import org.firstinspires.ftc.teamcode.EK10582.auton.action.AutonFlowerUp;
+import org.firstinspires.ftc.teamcode.EK10582.auton.action.AutonIntake;
 import org.firstinspires.ftc.teamcode.EK10582.auton.action.AutonShoot;
 
 import static com.pedropathing.api.Paths.*;
 
 import com.pedropathing.paths.Path;
 
+import static com.pedropathing.ivy.commands.Commands.waitMs;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 import static com.pedropathing.ivy.groups.Groups.sequential;
 
 @Autonomous
-public class RedBackIntake extends AutonBase {
+public class FrontFlower extends AutonBase {
 
     protected PoseFactory poseFactory() {
         return PoseFactory.degrees();
     }
 
-    private final PoseFactory redTwoIntake = poseFactory();
+    private final PoseFactory frontFlower = poseFactory();
     // our poses
-    private final Pose startPose = redTwoIntake.of(62, 132, 270);
-    private final Pose shoot = redTwoIntake.of(62, 115, 270);
-    private final Pose flowerBack = redTwoIntake.of(47, 115, 90);
-    private final Pose flowerForward = redTwoIntake.of(47, 128, 90);
-    private final Pose park = redTwoIntake.of(15, 115, 180);
+    private final Pose startPose = frontFlower.of(56, 8, 270);
+    private final Pose shoot = frontFlower.of(56, 18, 270);
+    private final Pose flowerBack = frontFlower.of(26, 47, 180);
+    private final Pose flowerForward = frontFlower.of(13, 47, 180);
+    private final Pose park = frontFlower.of(8, 96, 90);
 
 
-    //poses from before
-    private final Pose controlPose1 = redTwoIntake.of(52, 90, 0);
+    //control points
+    private final Pose controlPose1 = frontFlower.of(41, 37, 0);
 
     private Path shoot() {
         return line(startPose, shoot).linear(startPose, shoot);
@@ -67,9 +72,15 @@ public class RedBackIntake extends AutonBase {
         run(sequential(
                 follow(follower, shoot()),
                 action(new AutonShoot()),
-                follow(follower, park())
-                //remember to add a intake action
+                follow(follower, intakeReady()),
+                action(new AutonFlowerDown()),
+                follow(follower,intake()),
+                action(new AutonIntake()),
+                follow(follower, intakeBack()),
+                action(new AutonFlowerUp()),
+                follow(follower, park()),
+                waitMs(2000)
+
         ));
     }
 }
-

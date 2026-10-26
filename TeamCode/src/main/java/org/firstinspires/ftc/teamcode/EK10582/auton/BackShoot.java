@@ -15,21 +15,19 @@ import static com.pedropathing.ivy.groups.Groups.sequential;
 import static com.pedropathing.ivy.commands.Commands.waitMs;
 
 @Autonomous
-public class RedBackShoot extends AutonBase {
+public class BackShoot extends AutonBase {
 
     protected PoseFactory poseFactory() {
         return PoseFactory.degrees();
     }
 
-    private final PoseFactory redBackShoot = poseFactory();
+    private final PoseFactory backShoot = poseFactory();
     // our poses
-    private final Pose startPose = redBackShoot.of(62, 132, 90);
+    private final Pose startPose = backShoot.of(62, 132, 90);
 
-    private final Pose shoot = redBackShoot.of(62, 115, 90);
-    private final Pose park = redBackShoot.of(14, 115, 90);
+    private final Pose shoot = backShoot.of(62, 115, 90);
+    private final Pose park = backShoot.of(12, 115, 90);
 
-
-    //poses from before
 
     private Path shoot() {
         return line(startPose, shoot).linear(startPose, shoot);
