@@ -13,6 +13,8 @@ import static com.pedropathing.ivy.commands.Commands.waitMs;
 import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 import static com.pedropathing.ivy.groups.Groups.sequential;
 
+import org.firstinspires.ftc.teamcode.EK10582.auton.action.AutonFlowerUp;
+
 @Autonomous
 public class FrontPark extends AutonBase {
 
@@ -57,6 +59,7 @@ public class FrontPark extends AutonBase {
     public void runOpMode() {
         waitForStart(); // creates the follower at startPose()
         run(sequential(
+                action(new AutonFlowerUp()),
                 follow(follower, middle()),
                 follow(follower, park()),
                 waitMs(2000)

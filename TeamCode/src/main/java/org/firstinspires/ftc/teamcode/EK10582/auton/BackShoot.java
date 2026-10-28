@@ -4,6 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import com.pedropathing.api.PoseFactory;
 import com.pedropathing.math.Pose;
+
+import org.firstinspires.ftc.teamcode.EK10582.auton.action.AutonFlowerUp;
 import org.firstinspires.ftc.teamcode.EK10582.auton.action.AutonShoot;
 
 import static com.pedropathing.api.Paths.*;
@@ -53,6 +55,7 @@ public class BackShoot extends AutonBase {
     public void runOpMode() {
         waitForStart(); // creates the follower at startPose()
         run(sequential(
+                action(new AutonFlowerUp()),
                 waitMs(15000), // wait 15 seconds before driving
                 follow(follower, shoot()),
                 action(new AutonShoot()),

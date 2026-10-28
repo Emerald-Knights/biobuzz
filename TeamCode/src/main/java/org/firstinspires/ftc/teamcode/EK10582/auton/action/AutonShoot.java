@@ -16,6 +16,7 @@ public class AutonShoot extends Action {
         WAIT1,
         SPIN2,
         INTAKE,
+        WAIT3,
         SPIN3,
         WAIT2,
         SPIN4,
@@ -100,21 +101,31 @@ public class AutonShoot extends Action {
                 Robot.getInstance().launchMotor.setPower(0.0);
                 Robot.getInstance().intakeMotor.setPower(0.8);
                 if (stateTimer.milliseconds() >= 1000) {
+                    setInternalState(State.WAIT2);
+                }
+                break;
+
+            case WAIT2:
+                //Robot.getInstance().launch.activeLaunch = true;
+                Robot.getInstance().launchMotor.setPower(0.0);
+                Robot.getInstance().intakeMotor.setPower(0.0);
+                if (stateTimer.milliseconds() >= 1200) {
                     setInternalState(State.SPIN3);
                 }
                 break;
+
             case SPIN3:
                 //Robot.getInstance().launch.activeLaunch = true;
                 Robot.getInstance().launchMotor.setPower(0.8);
                 Robot.getInstance().intakeMotor.setPower(0.0);
                 if (stateTimer.milliseconds() >= 250) {
                     shootCounter++;
-                    setInternalState(shootCounter >= MAX_SHOOTS ? State.FINISHED : State.WAIT2);
+                    setInternalState(shootCounter >= MAX_SHOOTS ? State.FINISHED : State.WAIT3);
                 }
                 break;
 
 
-            case WAIT2:
+            case WAIT3:
                 // Crucial: Let the flywheel settle for 400ms after the intake "thump"
                 // and the previous shot's RPM drop.
                 //Robot.getInstance().launch.activeLaunch = false;

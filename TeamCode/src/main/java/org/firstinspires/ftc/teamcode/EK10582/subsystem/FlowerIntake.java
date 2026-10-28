@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.EK10582.subsystem;
 
 import static org.firstinspires.ftc.teamcode.EK10582.subsystem.SubsystemConstants.FLOWER_DOWN;
-import static org.firstinspires.ftc.teamcode.EK10582.subsystem.SubsystemConstants.FLOWER_UP;
+import static org.firstinspires.ftc.teamcode.EK10582.subsystem.SubsystemConstants.FLOWER_MEDIUM;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -16,7 +16,7 @@ public class FlowerIntake extends Subsystem{
         if (activeFlower) {
             Robot.getInstance().flowerServo.setPosition(FLOWER_DOWN);
         } else {
-            Robot.getInstance().flowerServo.setPosition(FLOWER_UP);
+            Robot.getInstance().flowerServo.setPosition(FLOWER_MEDIUM);
         }
     }
 

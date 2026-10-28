@@ -13,6 +13,8 @@ import static com.pedropathing.ivy.pedro.PedroCommands.follow;
 import static com.pedropathing.ivy.groups.Groups.sequential;
 import static com.pedropathing.ivy.commands.Commands.waitMs;
 
+import org.firstinspires.ftc.teamcode.EK10582.auton.action.AutonFlowerUp;
+
 @Autonomous
 public class BackPark extends AutonBase {
 
@@ -54,6 +56,7 @@ public class BackPark extends AutonBase {
     public void runOpMode() {
         waitForStart(); // creates the follower at startPose()
         run(sequential(
+                action(new AutonFlowerUp()),
                 waitMs(15000), // wait 15 seconds before driving
                 follow(follower, shoot()),
                 follow(follower, park()),

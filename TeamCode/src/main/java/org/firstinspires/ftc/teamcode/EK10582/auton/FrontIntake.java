@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.pedropathing.api.PoseFactory;
 import com.pedropathing.math.Pose;
 
+import org.firstinspires.ftc.teamcode.EK10582.auton.action.AutonFlowerUp;
 import org.firstinspires.ftc.teamcode.EK10582.auton.action.AutonIntake;
 import org.firstinspires.ftc.teamcode.EK10582.auton.action.AutonShoot;
 
@@ -73,6 +74,7 @@ public class FrontIntake extends AutonBase {
     public void runOpMode() {
         waitForStart(); // creates the follower at startPose()
         run(sequential(
+                action(new AutonFlowerUp()),
                 follow(follower, shoot()),
                 action(new AutonShoot()),
                 follow(follower, intakeReady()),

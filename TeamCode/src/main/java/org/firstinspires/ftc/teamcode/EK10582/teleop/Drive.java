@@ -39,6 +39,7 @@ public class Drive extends EKLinear {
             robot.launch.activeLaunch = driverStation.gamepad2.a;
 
             robot.flowerIntake.activeFlower = driverStation.gamepad2.x;
+            robot.flowerUp.activeFlowerUp = driverStation.gamepad2.y;
 
 
 
