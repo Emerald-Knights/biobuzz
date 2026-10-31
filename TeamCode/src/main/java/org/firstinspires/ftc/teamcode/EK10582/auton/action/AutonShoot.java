@@ -69,7 +69,7 @@ public class AutonShoot extends Action {
         switch (currentState) {
             case SPIN1:
                 //Robot.getInstance().launch.activeLaunch = true;
-                Robot.getInstance().launchMotor.setPower(0.8);
+                Robot.getInstance().launchMotor.setPower(0.7);
                 if (stateTimer.milliseconds() >= 250) {
                     shootCounter++;
                     setInternalState(shootCounter >= MAX_SHOOTS ? State.FINISHED : State.WAIT1);
@@ -88,7 +88,7 @@ public class AutonShoot extends Action {
 
             case SPIN2:
                 //Robot.getInstance().launch.activeLaunch = true;
-                Robot.getInstance().launchMotor.setPower(0.8);
+                Robot.getInstance().launchMotor.setPower(0.7);
                 if (stateTimer.milliseconds() >= 250) {
                     shootCounter++;
                     setInternalState(shootCounter >= MAX_SHOOTS ? State.FINISHED : State.INTAKE);
@@ -116,7 +116,7 @@ public class AutonShoot extends Action {
 
             case SPIN3:
                 //Robot.getInstance().launch.activeLaunch = true;
-                Robot.getInstance().launchMotor.setPower(0.8);
+                Robot.getInstance().launchMotor.setPower(0.7);
                 Robot.getInstance().intakeMotor.setPower(0.0);
                 if (stateTimer.milliseconds() >= 250) {
                     shootCounter++;
@@ -138,7 +138,7 @@ public class AutonShoot extends Action {
 
             case SPIN4:
                 //Robot.getInstance().launch.activeLaunch = true;
-                Robot.getInstance().launchMotor.setPower(0.8);
+                Robot.getInstance().launchMotor.setPower(0.7);
                 if (stateTimer.milliseconds() >= 250) {
                     shootCounter++;
                     setInternalState(State.FINISHED);
