@@ -16,7 +16,7 @@ public class Drive extends EKLinear {
             robot.mecanumDrive.rx = driverStation.getRightStickX();
 
             //slowmode
-            if (driverStation.getLB1()) {
+            if (driverStation.getLB2()) {
                 if (robot.mecanumDrive.slowMode == 1)
                     robot.mecanumDrive.slowMode = 0.5;
                 else {
@@ -36,10 +36,11 @@ public class Drive extends EKLinear {
             robot.intake.activeIntake= driverStation.gamepad1.right_bumper;
 
             robot.intake.reverseIntake= driverStation.gamepad2.b;
-            robot.launch.activeLaunch = driverStation.gamepad2.a;
+            robot.launch.activeLaunch = driverStation.gamepad2.right_bumper;
 
-            robot.flowerIntake.activeFlower = driverStation.gamepad2.x;
-            robot.flowerUp.activeFlowerUp = driverStation.gamepad2.y;
+            robot.flower.up = driverStation.gamepad2.x;
+            robot.flower.down = driverStation.gamepad2.a;
+
 
 
 

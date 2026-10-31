@@ -33,7 +33,7 @@ public class FrontIntake extends AutonBase {
     private final Pose shoot = frontIntake.of(56, 18, 270);
     private final Pose ballBack = frontIntake.of(30, 10, 180);
     private final Pose ballPosition = frontIntake.of(5, 10, 180);
-    private final Pose park = frontIntake.of(8, 96, 270);
+    private final Pose park = frontIntake.of(5.75, 92, 270);
 
 
     //poses from before
@@ -48,7 +48,7 @@ public class FrontIntake extends AutonBase {
     private Path intake() {
         //caps speed at 20 in/s for just this path so the intake has time to grab the balls
         return line(ballBack, ballPosition).linear(ballBack, ballPosition)
-                .with(Constants.foresightConfig.maxVelocityConstraint.at(23.0));
+                .with(Constants.foresightConfig.maxVelocityConstraint.at(26.0));
     }
     private Path intakeBack() {
         return line(ballPosition, ballBack).linear(ballPosition, ballBack);

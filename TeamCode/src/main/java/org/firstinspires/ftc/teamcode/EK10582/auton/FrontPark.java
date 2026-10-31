@@ -27,7 +27,7 @@ public class FrontPark extends AutonBase {
     private final Pose startPose = frontPark.of(56, 8, 270);
 
     private final Pose middle = frontPark.of(56, 18, 270);
-    private final Pose park = frontPark.of(8, 96, 270);
+    private final Pose park = frontPark.of(5.75, 92, 270);
 
     //control points
     private final Pose controlPose1 = frontPark.of(22, 27, 0);

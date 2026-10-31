@@ -44,17 +44,14 @@ public class Robot {
     public MecanumDrive mecanumDrive = new MecanumDrive();
     public Intake intake = new Intake();
 
-    public FlowerIntake flowerIntake = new FlowerIntake();
+    public Flower flower = new Flower();
 
-    public FlowerUp flowerUp = new FlowerUp();
 
     public Launch launch = new Launch();
 
     //Lists of active subsystems and telemetry
-    public List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, launch, flowerIntake, flowerUp);
-    // removed flowerIntake
-    public List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake, launch, flowerIntake, flowerUp);
-// removed flowerIntake
+    public List<Subsystem> subsystems = Arrays.asList(mecanumDrive, intake, launch, flower);
+    public List<Subsystem> telemetrySubsystems = Arrays.asList(mecanumDrive, intake, launch, flower);
 
     //Creates an arraylist called actions that stores all the actions that are currently being done
     private ArrayList<Action> actions = new ArrayList<Action>();
